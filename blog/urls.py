@@ -16,6 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from blog.apps.content.views import get_blogs, get_details
+
+# Register your models here.
+from blog.apps.content.models import *
+# 注册的目的就是为了让系统管理员能对注册的这些模型进行管理
+admin.site.register([Category, Tag, Blog])
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^', admin.site.urls),
+    url(r'^blogs/$',get_blogs),
+    url(r'^detail/(\d+)/$',get_details ,name='blog_get_detail'),
 ]

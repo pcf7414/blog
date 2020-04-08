@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog.apps.content'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,9 +76,13 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.mysql', # 数据库引擎
+        'HOST': '127.0.0.1', # 数据库主机
+        'PORT': 3306, # 数据库端口
+        'USER': 'root', # 数据库用户名
+        'PASSWORD': '123456', # 数据库用户密码
+        'NAME': 'blog' # 数据库名字
+    },
 }
 
 
@@ -118,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 配置静态文件加载路径
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
